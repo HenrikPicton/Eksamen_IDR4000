@@ -1,1 +1,0 @@
-## Kode til eksamen i IDR4000 - 1
