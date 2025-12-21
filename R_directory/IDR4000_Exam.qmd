@@ -34,7 +34,7 @@ table1 <- data.frame(Author = c("Chaves et al. (2024)", "Cribb et al. (2007)", "
 
                      n = c("39", "33", "67", "42", "24", "19", "24", "23", "45", "81"),
 
-                     "Hypertrophy measurement" = c("VL mCSA (US)", "lean mass (DXA), fiber specific CSA (biopsy)",
+                     Hypertrophy = c("VL mCSA (US)", "lean mass (DXA), fiber specific CSA (biopsy)",
                                      "VL, BB, TB, RF and VL MT (US)", "MGC and LGC (US)", 
                                      "QF mCSA (MRI)", "VL mCSA (US)",
                                      "BB + Brachialis, TB, RF, VI, VL MT (US)", "-||-", "-||-",
