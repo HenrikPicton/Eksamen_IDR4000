@@ -28,9 +28,17 @@ library(gt)
 table1 <- data.frame(Author = c("Chaves et al. (2024)", "Cribb et al. (2007)", "Evangelista et al. (2021)",
                                 "Kassiano et al. (2023)", "Neves et al. (2022)", "Ruple et al. (2023)", "Schoenfeld et al. (2015)", "Schoenfeld et al. (2016)",
                                 "Schoenfeld et al. (2019)", "Wohlann et al. (2024)"),
+
                      Design = c("RCT", "RCT", "RCT", "RCT", "RCT", "RCT", "RCT", "RCT", "RCT",
-                               "Controlled, not randomized"),
-                     n = c("39", "33", "67", "42", "24", "19", "24", "23", "45", "81"))
+                               "Quasi-RCT"),
+
+                     n = c("39", "33", "67", "42", "24", "19", "24", "23", "45", "81"),
+
+                     "Hypertrophy measurement" = c("VL mCSA (US)", "lean mass (DXA), fiber specific CSA (biopsy)",
+                                     "VL, BB, TB, RF and VL MT (US)", "MGC and LGC (US)", 
+                                     "QF mCSA (MRI)", "VL mCSA (US)",
+                                     "BB + Brachialis, TB, RF, VI, VL MT (US)", "-||-", "-||-",
+                                     "PM MT (US)"))
 
 table1 |> 
             gt()
