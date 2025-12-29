@@ -118,8 +118,21 @@ Alternative hypothesis: Higher baseline musclemass is associated with greater hy
 ```{r}
 library(exscidata)
 library(tidyverse)
+library(gt)
 
 Dataset <- hypertrophy
+  
+  
+prepost <- Dataset |>
+     select(
+      PARTICIPANT,
+      VL_T1,
+      VL_T4,
+      DXA_LBM_T1,
+      DXA_LBM_T3
+   )
+
+gt(prepost)
 ```
 
 ## 2.4 Discussion
