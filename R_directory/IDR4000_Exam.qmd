@@ -104,5 +104,25 @@ Additionally, an RT intervention of 8 weeks or longer is recommended, especially
 ## 1.11 Conclusion
 The literature reviewed in this assignment demonstrates how the ten selected studies investigate the effects RT have on muscle hypertrophy, which is commonly tested using experimental intervention designs with a pre- and post-measurements of target muscles where US dominated as measurement method. Across the chosen studies, repeated-measures statistical approaches dominate, reflecting the longitudinal nature of hypertrophic adaptations and the need to account for within-individual dependency. While RCTs provide strong support for causal inference regarding the effect of resistance training on muscle size, limitations related to study design, measurement methods, and bias restrict mechanistic interpretation. Future research would benefit from continued methodological rigor, particularly through improved randomization, assessor blinding, and the inclusion of appropriate control groups, to further strengthen causal inference in RT research. 
 
+# 2.0 Assignment 2 - Study report OUTLINE
 
+## 2.1 Introduction
+Research question: Is higher baseline musclemass associated with a greater hypertrophic response to resistance traning? 
+
+Null hypothesis: Higher baseline musclemass is not associated with a greater hypertrophic response
+Alternative hypothesis: Higher baseline musclemass is associated with greater hypertrophic response
+## 2.2 Methods
+
+## 2.3 Results
+
+```{r}
+library(exscidata)
+library(tidyverse)
+
+Dataset <- hypertrophy
+```
+
+## 2.4 Discussion
+
+## 2.5 Conclusion
 
