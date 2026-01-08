@@ -107,9 +107,9 @@ The literature reviewed in this assignment demonstrates how the ten selected stu
 # 2.0 Assignment 2 - Study report OUTLINE
 
 ## 2.1 Introduction
-Muscle hypertrophy is an adaptive process whereby exposure to an external stimulus leads to remodelling of muscle architecture, resulting in an increase in muscle cross-sectional area (MCSA) [@mcardleMuscleHyoertrophy2023]. Resistance training (RT) is considered the most effective exercise modality to induce muscle hypertrophy, primarily through the application of mechanical tension, muscle damage, and metabolic stress. Mechanical tension is the active force generation and passive stretch, caused by an external load on the muscles, initiating a signalling cascade that increases the rate of muscle protein synthesis.  Muscle damage caused by RT initiates an inflammatory response, resulting in the activation of satellite cells promoting repair and remodelling of muscle fibres, contributing to hypertrophy. Combined with mechanical tension, metabolic stress may assist in hypertrophic response through several indirect mechanisms (e.g. cell swelling, increased hormonal response, hypoxia, and activation of growth-related transcription factors) [@schoenfeldMechanismsMuscleHypertrophy2010].
+Muscle hypertrophy is an adaptive process whereby exposure to an external stimulus leads to remodelling of muscle architecture, resulting in an increase in muscle cross-sectional area (MCSA) [@mcardleMuscleHypertrophy2023]. Resistance training (RT) is considered the most effective exercise modality to induce muscle hypertrophy, primarily through the application of mechanical tension, muscle damage, and metabolic stress. Mechanical tension is the active force generation and passive stretch, caused by an external load on the muscles, initiating a signalling cascade that increases the rate of muscle protein synthesis.  Muscle damage caused by RT initiates an inflammatory response, resulting in the activation of satellite cells promoting repair and remodelling of muscle fibres, contributing to hypertrophy. Combined with mechanical tension, metabolic stress may assist in hypertrophic response through several indirect mechanisms (e.g. cell swelling, increased hormonal response, hypoxia, and activation of growth-related transcription factors) [@schoenfeldMechanismsMuscleHypertrophy2010].
 
-Greater muscle size is associated with greater strength, which improves athletic performance [@maughanStrengthCrosssectionalArea1983; @suchomelImportanceMuscularStrength2016; @tromarasLeanBodyMass2024]. Additionally, an increase in muscle size is connected to a significant improvement of metabolic health [@liAssociationsMuscleMass2018]. Reviews have previously suggested that RT induced hypertrophy diminishes as an individual becomes more trained, with slower rates of morphological change compared with untrained individuals [@fonsecaComparisonTraditionalAdvanced2023]. 
+Greater muscle size is associated with greater strength, which improves athletic performance [@maughanStrengthCrosssectionalArea1983; @suchomelImportanceMuscularStrength2016; @tromarasLeanBodyMass2024]. Additionally, an increase in muscle size is connected to a significant improvement of metabolic health [@liAssociationsMuscleMass2018]. Reviews have previously suggested that RT induced hypertrophy diminishes as an individual becomes more trained, with slower rates of morphological change compared with untrained individuals. Additionally, the amount of muscle a person can gain varies between individuals [@fonsecaComparisonTraditionalAdvanced2023;@schoenfeldMechanismsMuscleHypertrophy2010]. However, it is unclear whether an individual with a greater than average hypertrophic response continues the trend of responsiveness as training status improves.  
 
 @mangineInfluenceBaselineMuscle2018 investigated the effects of baseline muscle size on training adaptations. 14 young men with an average resistance training experience of ~6 years were recruited and split into two equal groups based on MCSA: the larger (LGR, n = 7) and smaller (SMR, n = 7) group. After an 8-week intervention they did not find a significant difference in muscle growth between the LGR and SMR group. 
 
@@ -286,6 +286,58 @@ results |>
 
 ```
 
+### 2.3.1 Vastus Lateralis
+
+```{r fig-vl}
+#| fig-cap: "Vastus lateralis MT and hypertrophic response"
+#| message: false
+#| warning: false
+#| echo: false
+
+ggplot(analysis_data, aes(x = VL_T1, y = vl_delta)) +
+  geom_point(size = 2, alpha = 0.8) +
+  geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
+  labs(
+    x = "Baseline Vastus Lateralis MT (mm)",
+    y = "Δ Vastus Lateralis MT (mm)") +
+  theme_classic()
+```
+
+### 2.3.2 Biceps Brachii
+
+```{r fig-bb}
+#| fig-cap: "Biceps Brachii MT and hypertrophic response"
+#| message: false
+#| warning: false
+#| echo: false
+
+ggplot(analysis_data, aes(x = BICEPS_T1, y = bb_delta)) +
+  geom_point(size = 2, alpha = 0.8) +
+  geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
+  labs(
+    x = "Baseline Biceps Brachii MT (mm)",
+    y = "Δ Biceps Brachii MT (mm)"
+  ) +
+  theme_classic()
+```
+
+### 2.3.3Lean mass
+
+```{r fig-lbm}
+#| fig-cap: "lean mass and hypertrophic response (DXA)"
+#| message: false
+#| warning: false
+#| echo: false
+
+ggplot(analysis_data, aes(x = DXA_LBM_T1, y = dxa_delta)) +
+  geom_point(size = 2, alpha = 0.8) +
+  geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
+  labs(
+    x = "Baseline lean mass (kg)",
+    y = "Δ lean mass (kg)"
+  ) +
+  theme_classic()
+```
 ## 2.4 Discussion
 
 ## 2.5 Conclusion
