@@ -27,6 +27,7 @@ All literature discussed in this assignment were accessed through PubMed [@Natio
 
 library(tidyverse)
 library(gt)
+library(patchwork)
 
 table1 <- data.frame(Author = c("Chaves et al. (2024)", "Cribb et al. (2007)", "Evangelista et al. (2021)",
                                 "Kassiano et al. (2023)", "Neves et al. (2022)", "Ruple et al. (2023)", "Schoenfeld et al. (2015)", "Schoenfeld et al. (2016)",
@@ -165,18 +166,17 @@ descriptives <- prevalues |>
       TRAINING_AGE = "RT experience (years)",
       BODYMASS_T1 = "Body mass (kg)",
       DXA_LBM_T1 = "Lean body mass (kg)",
-      VL_T1 = "Vastus lateralis thickness (mm)",
-      BICEPS_T1 = "Biceps brachii thickness (mm)"
+      VL_T1 = "VL MT (mm)",
+      BICEPS_T1 = "BB MT (mm)"
     )
   )
 
 descriptives |>
   gt() |>
   cols_label(`Mean ± SD` = "Mean ± SD") |> 
-  tab_options(
-                    table.font.size = px(12)) |> 
-                 tab_source_note(
-                    source_note = "Data is presented as Mean ± SD of all participants")
+   tab_source_note(
+                   source_note = md("Data is presented as Mean ± SD of all participants")
+                  )
   
 
 ```
@@ -255,19 +255,107 @@ results <- results |>
 ``` 
 
 ## 2.3 Results
-
-
+Only 30 participants underwent a pre- and post evaluation of VL MT and DXA lean mass, while 31 participants completed the pre- and post evaluation of BB MT. 
 
 ```{r}
 #| label: tbl-table3
-#| tbl-cap: "Changes in MT and lean mass"
+#| tbl-cap: "Pre- and post-intervention values and mean change"
+#| message: false
+#| warning: false
+#| echo: false
+
+summary_table <- analysis_data |>
+  summarise(
+    VL_pre  = mean(VL_T1, na.rm = TRUE),
+    VL_post = mean(VL_T4, na.rm = TRUE),
+    VL_delta = mean(vl_delta, na.rm = TRUE),
+
+    BB_pre  = mean(BICEPS_T1, na.rm = TRUE),
+    BB_post = mean(BICEPS_T4, na.rm = TRUE),
+    BB_delta = mean(bb_delta, na.rm = TRUE),
+
+    DXA_pre  = mean(DXA_LBM_T1, na.rm = TRUE),
+    DXA_post = mean(DXA_LBM_T3, na.rm = TRUE),
+    DXA_delta = mean(dxa_delta, na.rm = TRUE)
+  )
+
+results_prepost <- tibble(
+  Outcome = c("VL MT (mm)", "BB MT (mm)", "DXA lean mass (kg)"),
+  Pre  = c(
+    mean(analysis_data$VL_T1, na.rm = TRUE),
+    mean(analysis_data$BICEPS_T1, na.rm = TRUE),
+    mean(analysis_data$DXA_LBM_T1, na.rm = TRUE)
+  ),
+  Post = c(
+    mean(analysis_data$VL_T4, na.rm = TRUE),
+    mean(analysis_data$BICEPS_T4, na.rm = TRUE),
+    mean(analysis_data$DXA_LBM_T3, na.rm = TRUE)
+  ),
+  Delta = c(
+    mean(analysis_data$vl_delta, na.rm = TRUE),
+    mean(analysis_data$bb_delta, na.rm = TRUE),
+    mean(analysis_data$dxa_delta, na.rm = TRUE)
+  )
+)
+
+mean_sd <- function(x) {
+  m <- mean(x, na.rm = TRUE)
+  s <- sd(x, na.rm = TRUE)
+  sprintf("%.2f ± %.2f", m, s)
+}
+
+results_prepost <- tibble(
+  Outcome = c("VL MT (mm)", "BB MT (mm)", "DXA lean mass (kg)"),
+  Pre  = c(
+    mean_sd(analysis_data$VL_T1),
+    mean_sd(analysis_data$BICEPS_T1),
+    mean_sd(analysis_data$DXA_LBM_T1)
+  ),
+  Post = c(
+    mean_sd(analysis_data$VL_T4),
+    mean_sd(analysis_data$BICEPS_T4),
+    mean_sd(analysis_data$DXA_LBM_T3)
+  ),
+  Delta = c(
+    mean_sd(analysis_data$vl_delta),
+    mean_sd(analysis_data$bb_delta),
+    mean_sd(analysis_data$dxa_delta)
+  )
+)
+
+
+
+results_prepost |>
+  gt() |>
+  cols_label(
+    Outcome = "Measurement",
+    Pre = "Pre",
+    Post = "Post",
+    Delta = "Δ"
+  ) |> 
+      tab_source_note(
+                   source_note = md("Data is presented as Mean ± SD of all participants; 
+                   **Δ (delta)**, mean change from baseline (pre) to post; **VL MT**, 
+                   Vastus Lateralis muscle thickness (mm); **BB MT**, Biceps Brachii muscle thickness (mm); **DXA**, Duo x-ray absorptiometry.")
+                     )
+
+```
+
+A significant negative association was observed between baseline VL MT and change in VL MT following the intervention. Similarly, baseline BB MT was negatively associated with change in BB MT (@tbl-table4; @fig-1, panels A and B).
+
+In contrast, no significant association was observed between baseline DXA-derived lean mass and change in lean mass over the intervention period (@tbl-table4; @fig-1 panel C).
+
+
+```{r}
+#| label: tbl-table4
+#| tbl-cap: "Results of changes (Δ) with baseline as predictor"
 #| message: false
 #| warning: false
 #| echo: false
 
 results |>
   select(
-    Outcome, Beta, SE,
+    Outcome, Beta,
     p_display,
     CI_low, CI_high,
     R2, n
@@ -276,69 +364,67 @@ results |>
   cols_label(
     Outcome = "Outcome",
     Beta = "β",
-    SE = "SE",
     p_display = "p",
     CI_low = "95% CI (lower)",
     CI_high = "95% CI (upper)",
     R2 = "R²",
     n = "n") |> 
-   tab_source_note(source_note = "NEEDS TO BE DONE")
+   tab_source_note(
+      source_note = md("**Δ (delta)**, mean change from baseline (pre) to post; **VL MT**, Vastus Lateralis muscle thickness (mm); **BB MT**, Biceps Brachii muscle thickness (mm); **DXA**, Duo x-ray absorptiometry; **β (Estimate)**, for x value in baseline, outcome variable changes with y; **95% Confidence interval**, where the true population effect is expected to lie with 95% confidence, given the observed data and model; **R²**, the proportion of variance in the outcome variable that is explained by the predictor variable in the model; **n**, number of participants included in analysis.")
+   )
+
 
 ```
 
-### 2.3.1 Vastus Lateralis
 
-```{r fig-vl}
-#| fig-cap: "Vastus lateralis MT and hypertrophic response"
+```{r fig-1}
+#| fig-cap: "Linear relationship between baseline and hypertrophy of A) VL MT, B) BB MT, and C) lean mass"
+#| fig-show: hold
+#| fig-height: 4
+#| fig-width: 12
 #| message: false
 #| warning: false
 #| echo: false
 
-ggplot(analysis_data, aes(x = VL_T1, y = vl_delta)) +
+p1 <- ggplot(analysis_data, aes(x = VL_T1, y = vl_delta)) +
   geom_point(size = 2, alpha = 0.8) +
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
   labs(
-    x = "Baseline Vastus Lateralis MT (mm)",
-    y = "Δ Vastus Lateralis MT (mm)") +
-  theme_classic()
-```
-
-### 2.3.2 Biceps Brachii
-
-```{r fig-bb}
-#| fig-cap: "Biceps Brachii MT and hypertrophic response"
-#| message: false
-#| warning: false
-#| echo: false
-
-ggplot(analysis_data, aes(x = BICEPS_T1, y = bb_delta)) +
-  geom_point(size = 2, alpha = 0.8) +
-  geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
-  labs(
-    x = "Baseline Biceps Brachii MT (mm)",
-    y = "Δ Biceps Brachii MT (mm)"
+    x = "Baseline VL MT (mm)",
+    y = "Δ VL MT (mm)",
+    title = "A)"
   ) +
   theme_classic()
-```
 
-### 2.3.3Lean mass
+p2 <- ggplot(analysis_data, aes(x = BICEPS_T1, y = bb_delta)) +
+  geom_point(size = 2, alpha = 0.8) +
+  geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
+  labs(
+    x = "Baseline BB MT (mm)",
+    y = "Δ BB MT (mm)",
+    title = "B)"
+  ) +
+  theme_classic()
 
-```{r fig-lbm}
-#| fig-cap: "lean mass and hypertrophic response (DXA)"
-#| message: false
-#| warning: false
-#| echo: false
-
-ggplot(analysis_data, aes(x = DXA_LBM_T1, y = dxa_delta)) +
+p3 <- ggplot(analysis_data, aes(x = DXA_LBM_T1, y = dxa_delta)) +
   geom_point(size = 2, alpha = 0.8) +
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
   labs(
     x = "Baseline lean mass (kg)",
-    y = "Δ lean mass (kg)"
+    y = "Δ lean mass (kg)",
+    title = "C)"
   ) +
   theme_classic()
+
+(p1 | p2 | p3)
 ```
+
 ## 2.4 Discussion
+It is unclear whether an individual with a greater than average hypertrophic response continues the trend of responsiveness as training status improves. The purpose of this assignment is to further investigate the association between hypertrophy and baseline MT and lean mass in resistance trained young men.
+
+Unlike @mangineInfluenceBaselineMuscle2018, who saw no significant difference in muscle growth between the LGR and SMR group after 8 weeks of RT, this assignment saw a significant negative association in baseline MT and change in MT of both BB and VL after a 6-week RT intervention. One of the reasons behind this difference could be sample size, as Mangine et al had a total of 14 participants split into two equal groups (7 each), against 31 participants in this assignment. A smaller sample size increases the risk of type II errors, meaning that their study has a greater risk of falsely supporting their null hypothesis [@serdarSampleSizePower2021].
+
+
 
 ## 2.5 Conclusion
 
