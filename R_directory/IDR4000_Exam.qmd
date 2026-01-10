@@ -105,7 +105,7 @@ Additionally, an RT intervention of 8 weeks or longer is recommended, especially
 ## 1.11 Conclusion
 The literature reviewed in this assignment demonstrates how the ten selected studies investigate the effects RT have on muscle hypertrophy, which is commonly tested using experimental intervention designs with a pre- and post-measurements of target muscles where US dominated as measurement method. Across the chosen studies, repeated-measures statistical approaches dominate, reflecting the longitudinal nature of hypertrophic adaptations and the need to account for within-individual dependency. While RCTs provide strong support for causal inference regarding the effect of resistance training on muscle size, limitations related to study design, measurement methods, and bias restrict mechanistic interpretation. Future research would benefit from continued methodological rigor, particularly through improved randomization, assessor blinding, and the inclusion of appropriate control groups, to further strengthen causal inference in RT research. 
 
-# 2.0 Assignment 2 - Study report OUTLINE
+# 2.0 Assignment 2 - Is higher baseline muscle mass associated with a greater hypertrophic response to resistance training? 
 
 ## 2.1 Introduction
 Muscle hypertrophy is an adaptive process whereby exposure to an external stimulus leads to remodelling of muscle architecture, resulting in an increase in muscle cross-sectional area (MCSA) [@mcardleMuscleHypertrophy2023]. Resistance training (RT) is considered the most effective exercise modality to induce muscle hypertrophy, primarily through the application of mechanical tension, muscle damage, and metabolic stress. Mechanical tension is the active force generation and passive stretch, caused by an external load on the muscles, initiating a signalling cascade that increases the rate of muscle protein synthesis.  Muscle damage caused by RT initiates an inflammatory response, resulting in the activation of satellite cells promoting repair and remodelling of muscle fibres, contributing to hypertrophy. Combined with mechanical tension, metabolic stress may assist in hypertrophic response through several indirect mechanisms (e.g. cell swelling, increased hormonal response, hypoxia, and activation of growth-related transcription factors) [@schoenfeldMechanismsMuscleHypertrophy2010].
@@ -118,6 +118,7 @@ In contrast to @mangineInfluenceBaselineMuscle2018, this study will maintain bas
 
 
 ## 2.2 Methods
+The methods and data of this assignment was collected from research conducted by @haunEffectsGradedWhey2018 and @haunPretrainingSkeletalMuscle2019.
 
 ### 2.2.1 Participants
 Participants were evaluated through a screening process with two criteria: a self-reported RT experience of < 1.0 years, and a back squat 1-repetition maximum (RM) ≥ 1.5 x body mass (calculated from a 3RM test). 34 Participants completed the screening. One participant dropped out due to personal reasons, two others for not being able to complete the RT intervention, which led to a final count of 31 participants (@tbl-table2). 
@@ -255,7 +256,7 @@ results <- results |>
 ``` 
 
 ## 2.3 Results
-Only 30 participants underwent a pre- and post evaluation of VL MT and DXA lean mass, while 31 participants completed the pre- and post evaluation of BB MT. 
+Only 30 participants underwent a pre- and post-evaluation of VL MT and DXA lean mass, while 31 participants completed the pre- and post-evaluation of BB MT. 
 
 ```{r}
 #| label: tbl-table3
@@ -341,9 +342,9 @@ results_prepost |>
 
 ```
 
-A significant negative association was observed between baseline VL MT and change in VL MT following the intervention. Similarly, baseline BB MT was negatively associated with change in BB MT (@tbl-table4; @fig-1, panels A and B).
+A significant negative association was observed between baseline VL MT and change in VL MT following the intervention. Similarly, baseline BB MT was negatively associated with change in BB MT (@tbl-table4 and @fig-1, panels A and B).
 
-In contrast, no significant association was observed between baseline DXA-derived lean mass and change in lean mass over the intervention period (@tbl-table4; @fig-1 panel C).
+In contrast, no significant association was observed between baseline DXA-derived lean mass and change in lean mass over the intervention period (@tbl-table4 and @fig-1 panel C).
 
 
 ```{r}
@@ -422,7 +423,7 @@ p3 <- ggplot(analysis_data, aes(x = DXA_LBM_T1, y = dxa_delta)) +
 ## 2.4 Discussion
 It is unclear whether an individual with a greater than average hypertrophic response continues the trend of responsiveness as training status improves. The purpose of this assignment is to further investigate the association between hypertrophy and baseline MT and lean mass in resistance trained young men.
 
-Unlike @mangineInfluenceBaselineMuscle2018, who saw no significant difference in muscle growth between the LGR and SMR group after 8 weeks of RT, this assignment saw a significant negative association in baseline MT and change in MT of both BB and VL after a 6-week RT intervention. One of the reasons behind this difference could be sample size, as Mangine et al had a total of 14 participants split into two equal groups (7 each), against 31 participants in this assignment. A smaller sample size increases the risk of type II errors, meaning that their study has a greater risk of falsely supporting their null hypothesis [@serdarSampleSizePower2021].
+Unlike @mangineInfluenceBaselineMuscle2018, who saw no significant difference in muscle growth between the LGR and SMR group after 8 weeks of RT, this assignment saw a significant negative association in baseline MT and change in MT of both BB and VL after a 6-week RT intervention. One possible explanation could be sample size, as Mangine et al had a total of 14 participants split into two equal groups (7 each), versus 31 participants in this assignment. A smaller sample size increases the risk of type II errors, meaning that their study has a greater risk of falsely supporting their null hypothesis [@serdarSampleSizePower2021].
 
 
 
