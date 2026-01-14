@@ -1,6 +1,4 @@
 ---
-title: "IDR4000 Portfolio assessment"
-author: Henrik Picton
 bibliography: references.bib
 csl: "apa.csl"
 format: typst
@@ -8,6 +6,58 @@ classoption: 12pt
 execute:
     cache: true
 ---
+
+```{=typst}
+// --- Front page ---
+#set page(numbering: none, margin: (x: 3cm, y: 3cm))
+
+#align(center + horizon)[
+  #image("inn_logo.png", width: 40%)
+  #v(3em)
+
+  #text(size: 26pt, weight: "bold", tracking: 0.5pt)[
+    IDR4000 Quantitative methods and \ statistics
+  ]
+  
+  #v(0.8em)
+  #text(size: 18pt, style: "italic", fill: gray.darken(20%))[Portfolio assessment – Assignment 1, 2, and 3]
+  
+  #v(1.5em)
+  #line(length: 60%, stroke: 0.5pt + gray)
+  #v(1.5em)
+
+  #grid(
+    columns: (1fr),
+    gutter: 1.2em,
+    text(size: 14pt)[*Candidate number:* 203],
+    text(size: 12pt)[Faculty of health and social sciences],
+    text(size: 12pt)[Subject: IDR4000],
+    text(size: 12pt)[År: 2026]
+  )
+]
+
+#pagebreak()
+
+// --- Setup for table of contents (Page numbers start here) ---
+#set page(numbering: "1", margin: (x: 2.5cm, y: 2.5cm))
+#counter(page).update(1)
+
+// --- Table of contents ---
+#outline(title: "Table of contents", depth: 3, indent: auto)
+
+#pagebreak()
+
+// --- Github link ---
+#heading(level: 1, numbering: none)[Github link]
+#v(1em)
+
+All data collected and analyzed are available in the github repositoty linked below:
+
+#v(1em)
+*Repository:* #link("https://github.com/HenrikPicton/Eksamen_IDR4000_kandidat203")[https://github.com/HenrikPicton/Eksamen_IDR4000_kandidat203]
+#pagebreak()
+```
+
 # Assignment 1 - Effect of resistance training on muscle hypertrophy
 
 ## 1.1 Introduction
@@ -474,4 +524,6 @@ Skinfold thickness measurement is a field-based method commonly used in epidemio
 
 ### 3.7 Conclusion
 This assignment had the goal of evaluating different measurement methods for %BF. The 4C model is considered the gold standard because it accounts for inter-individual variability in hydration and mineral content. However, due to its complexity, high cost, and time consumption other methods could be considered. DXA has high validity relative to the 4C model, with high reliability. BIA, while being less accurate and assumption-dependent, has acceptable reliability, is cheap, quick, and non-invasive, making it more suitable for larger study populations. Finally, the skinfold measurement method has the lowest validity, and its reliability is heavily dependent on the operator. However, it is useful in cases where resources are limited. No method is clearly better than the other; it all depends on the study’s precision requirements, study size, available resources, and population characteristics. 
+
+{{< pagebreak >}}
 
